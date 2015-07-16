@@ -1,0 +1,3 @@
+#!/bin/bash
+rm -f items.json
+scrapy crawl dota2vpgame --nolog #-o items.json --nolog
