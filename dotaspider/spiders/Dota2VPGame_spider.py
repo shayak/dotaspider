@@ -40,9 +40,12 @@ class Dota2VPGameSpider(scrapy.Spider):
         handicap_xpath = "//div[@class='spinach-corps']//a[contains(@title,'handicap')]/span[@class='f-warning']"
         bestof_xpath = "//div[@class='spinach-corps']//div[@class='spinach-corps-vs']//span[@class='f-14']"
         
-        lst = response.xpath(data_xpath+"/p/text()").extract()
-        clean_lst = map(lambda x: x.strip(), lst)
+        odds_xpath = data_xpath + "//span[@class='vp-item-odds']/text()"
+        teams_xpath = data_xpath + "//p[@class='spinach-corps-name ellipsis']/@title"
 
+        odds = map(lambda x: float(x.strip()), response.xpath(odds_xpath).extract())
+        teams = response.xpath(teams_xpath).extract()
+        
         h = response.xpath(handicap_xpath + '/text()').extract()[0]
         hteam = h[h.find("[")+1:h.find("-")].strip()
         handicap = h[h.find("-")+1:h.find("]")].strip()
@@ -52,12 +55,11 @@ class Dota2VPGameSpider(scrapy.Spider):
         dic = DotaSpiderResult()
         dic['handicap_team'] = hteam
         dic['handicap'] = float(handicap)
-        dic['team1'] = clean_lst[0]
-        dic['odds1'] = float(clean_lst[1])
-        dic['team2'] = clean_lst[2]
-        dic['odds2'] = float(clean_lst[3])
+        dic['team1'] = teams[0]
+        dic['odds1'] = odds[0]
+        dic['team2'] = teams[1]
+        dic['odds2'] = odds[1]
         dic['link'] = link
         dic['bestof'] = bestof
-        
         yield dic
 
