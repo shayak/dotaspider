@@ -1,4 +1,6 @@
-gametags = ["dota", "douyu"]
+gametags = ["nba", "soccer"]
+
+return_threshold = 0.8
 
 teams = [
 "Team Secret",
@@ -16,5 +18,6 @@ teams = [
 "Vega Squadron.G2A",
 "MVP HOT6",
 "compLexity Gaming",
+"Newbee.Miracle",
 "Braveheart"
 ]

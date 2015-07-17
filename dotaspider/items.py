@@ -14,8 +14,11 @@ class DotaspiderItem(scrapy.Item):
     link = scrapy.Field()
 
 class DotaSpiderResult(scrapy.Item):
+    handicap = scrapy.Field()
+    handicap_team = scrapy.Field()
     team1 = scrapy.Field()
     team2 = scrapy.Field()
     odds1 = scrapy.Field()
     odds2 = scrapy.Field()
     link = scrapy.Field()
+    bestof = scrapy.Field()

@@ -16,7 +16,7 @@ NEWSPIDER_MODULE = 'dotaspider.spiders'
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'dotaspider (+http://www.yourdomain.com)'
 ITEM_PIPELINES = {
-    'dotaspider.pipelines.TeamConstraintPipeline':300
+    'dotaspider.pipelines.ConstraintPipeline':300
 }
 MAIL_FROM = 'dotaspider007@gmail.com'
 MAIL_TO = 'shayak007@gmail.com'

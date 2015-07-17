@@ -6,7 +6,8 @@ def sendMail(data):
     gmailUser = 'dotaspider007@gmail.com'
     gmailPassword = 'dotapass'
     recipient = 'dotaspider007@gmail.com'
-    title = '{0} vs {1}'.format(data['team1'], data['team2'])
+    title = '{0} - {1} | {2} vs {3} | {4}'.format(data['handicap_team'], 
+                data['handicap'], data['team1'], data['team2'], data['bestof'])
     html="""\
     <html>
       <head></head>
