@@ -1,7 +1,7 @@
 import scrapy
 import json
-import helper
-import data
+from dotaspider.utility import helper
+from dotaspider.data import data
 from dotaspider.items import DotaspiderItem, DotaSpiderResult
 
 class Dota2VPGameSpider(scrapy.Spider):
