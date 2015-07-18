@@ -14,9 +14,13 @@ class Dota2VPGameSpider(scrapy.Spider):
 
     def parse(self, response):
         pages_xpath = "//div[@class='pager']//li[starts-with(@class, 'page')]/a"
-        for sel in response.xpath(pages_xpath):
-            path = sel.xpath('@href').extract()[0]
-            yield scrapy.Request(self.baseurl+path, callback=self.parsepage)
+        resp = response.xpath(pages_xpath)
+        if len(resp)==0:
+            yield scrapy.Request(self.start_urls[0], callback=self.parsepage)
+        else:
+            for sel in response.xpath(pages_xpath):
+                path = sel.xpath('@href').extract()[0]
+                yield scrapy.Request(self.baseurl+path, callback=self.parsepage)
 
     def parsepage(self, response):
         items = []
@@ -36,9 +40,13 @@ class Dota2VPGameSpider(scrapy.Spider):
             yield scrapy.Request(handicap_link, callback=lambda r, l=handicap_link:self.parsebet(r, l))
 
     def parsebet(self, response, link):
+        schedule_xpath = "//div[@class='spinach-corps']//div[@class='spinach-item-tt']/p[@class='pull-right']"
         data_xpath = "//div[@class='spinach-corps-data']"
         handicap_xpath = "//div[@class='spinach-corps']//a[contains(@title,'handicap')]/span[@class='f-warning']"
         bestof_xpath = "//div[@class='spinach-corps']//div[@class='spinach-corps-vs']//span[@class='f-14']"
+
+        if len(response.xpath(schedule_xpath+"/span[text()='Cleared']")) > 0:
+            return
         
         odds_xpath = data_xpath + "//span[@class='vp-item-odds']/text()"
         teams_xpath = data_xpath + "//p[@class='spinach-corps-name ellipsis']/@title"
