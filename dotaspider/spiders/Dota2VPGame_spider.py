@@ -9,6 +9,7 @@ class Dota2VPGameSpider(scrapy.Spider):
     baseurl = "http://dota2.vpgame.com"
     allowed_domains = ["dota2.vpgame.com"]
     start_urls = [baseurl + "/guess.html"]
+    
     bets_list_xpath = "//div[@class='items']/a"
     handicap_xpath = "//ul[@class='spinach-tap clearfix']//li/a[text()='Handicap']"
 
