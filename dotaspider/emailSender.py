@@ -1,3 +1,5 @@
+from datetime import datetime
+
 def sendMail(data):
     import smtplib
     from email.MIMEMultipart import MIMEMultipart
@@ -6,18 +8,20 @@ def sendMail(data):
     gmailUser = 'dotaspider007@gmail.com'
     gmailPassword = 'dotapass'
     recipient = 'dotaspider007@gmail.com'
-    title = '{0} - {1} | {2} vs {3} | {4}'.format(data['handicap_team'], 
-                data['handicap'], data['team1'], data['team2'], data['bestof'])
+    title = '{0} - {1} | {2} vs {3} | {4} | {5} min.'.format(data['handicap_team'], 
+                data['handicap'], data['team1'], data['team2'], data['bestof'], 
+                (data['start'] - datetime.now()).seconds/60)
     html="""\
     <html>
       <head></head>
         <body>
             <a href="{0}" style="text-decoration:none">
                 {1} ({2}) vs {3} ({4})
-            </a>
+            </a><br><br>
+            <p>Start: {5}</p>
         </body>
     </html>
-    """.format(data['link'], data['team1'], data['odds1'], data['team2'], data['odds2'])
+    """.format(data['link'], data['team1'], data['odds1'], data['team2'], data['odds2'], data['start'])
 
     msg = MIMEMultipart()
     msg['From'] = gmailUser

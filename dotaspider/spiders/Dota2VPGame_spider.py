@@ -40,9 +40,6 @@ class Dota2VPGameSpider(scrapy.Spider):
         handicap_link_xpath = Xpaths.handicap_link
         for sel in response.xpath(handicap_link_xpath):
             handicap_link = self.baseurl+sel.extract()
-            print " XPATH = " + handicap_link_xpath
-            print " URL = " + response.url
-            print 'crawling: ' + handicap_link
             yield scrapy.Request(handicap_link, callback=lambda r, l=handicap_link:self.parsebet(r, l))
 
     def parsebet(self, response, link):
@@ -52,7 +49,8 @@ class Dota2VPGameSpider(scrapy.Spider):
 
         if len(response.xpath(schedule_xpath+"/span[text()='Cleared']")) > 0:
             return
-        
+       
+        starttime = helper.getStartTime(response.xpath(schedule_xpath+"/span[@class='mr-5']/text()").extract()[0])
         odds_xpath = Xpaths.odds
         teams_xpath = Xpaths.teams
 
@@ -74,5 +72,7 @@ class Dota2VPGameSpider(scrapy.Spider):
         dic['odds2'] = odds[1]
         dic['link'] = link
         dic['bestof'] = bestof
+        dic['start'] = starttime
+        
         yield dic
 

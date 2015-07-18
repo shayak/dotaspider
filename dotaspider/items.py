@@ -22,3 +22,4 @@ class DotaSpiderResult(scrapy.Item):
     odds2 = scrapy.Field()
     link = scrapy.Field()
     bestof = scrapy.Field()
+    start = scrapy.Field()
