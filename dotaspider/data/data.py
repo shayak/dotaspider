@@ -18,6 +18,8 @@ teams = [
 "Vega Squadron.G2A",
 "MVP HOT6",
 "compLexity Gaming",
+
+"Energy Pacemaker",
 "Newbee.Miracle",
 "Braveheart"
 ]

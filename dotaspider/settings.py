@@ -18,11 +18,5 @@ NEWSPIDER_MODULE = 'dotaspider.spiders'
 ITEM_PIPELINES = {
     'dotaspider.pipelines.ConstraintPipeline':300
 }
-MAIL_FROM = 'dotaspider007@gmail.com'
-MAIL_TO = 'shayak007@gmail.com'
-MAIL_SUBJECT = 'Dota Bet Matched'
-MAIL_HOST = 'smtp.gmail.com'
-MAIL_PORT = '587'
-MAIL_USER = 'dotaspider007@gmail.com'
-MAIL_PASS = 'dotapass'
+
 

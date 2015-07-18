@@ -5,7 +5,7 @@
 # Don't forget to add your pipeline to the ITEM_PIPELINES setting
 # See: http://doc.scrapy.org/en/latest/topics/item-pipeline.html
 from dotaspider.emailSender import sendMail
-from dotaspider.spiders import data
+from dotaspider.data import data
 from scrapy.exceptions import DropItem
 
 class ConstraintPipeline(object):
